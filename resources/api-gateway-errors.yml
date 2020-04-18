@@ -1,0 +1,28 @@
+# Handle API Gateway CORS Errors
+# We need to add CORS headers to API Gateway errors
+# When we make an API request, API Gateway gets invoked before our Lambda functions 
+# This means that if there is an error at the API Gateway level, the CORS headers won’t be set
+# CORS related errors are one of the most common Serverless API errors
+# Serverless Framework supports CloudFormation to help us configure our API Gateway instance through code
+# CloudFormation resource
+# We are adding the CORS headers to the ApiGatewayRestApi resource in our app
+# The GatewayResponseDefault4XX is for 4xx errors, while GatewayResponseDefault5XX is for 5xx errors
+Resources:
+  GatewayResponseDefault4XX:
+    Type: 'AWS::ApiGateway::GatewayResponse'
+    Properties:
+      ResponseParameters:
+         gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+         gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+      ResponseType: DEFAULT_4XX
+      RestApiId:
+        Ref: 'ApiGatewayRestApi'
+  GatewayResponseDefault5XX:
+    Type: 'AWS::ApiGateway::GatewayResponse'
+    Properties:
+      ResponseParameters:
+         gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+         gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+      ResponseType: DEFAULT_5XX
+      RestApiId:
+        Ref: 'ApiGatewayRestApi'
