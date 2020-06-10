@@ -2,7 +2,7 @@
 // Add a Billing API
 // It is going to take a Stripe token and the number of notes the user wants to store
 import handler from "./libs/handler-lib";
-import stripePackage from "stripe"
+import stripePackage from "stripe";
 import { calculateCost } from "./libs/billing-lib";
 
 export const main = handler(async (event, context) => {
