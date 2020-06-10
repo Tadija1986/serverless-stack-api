@@ -1,5 +1,5 @@
-import * as uuid from "uuid"; // generates unique ids, we need this for storing things to DynamoDB
 import handler from "./libs/handler-lib"; // uvozi async Lambda funkciju
+import * as uuid from "uuid"; // generates unique ids, we need this for storing things to DynamoDB
 import dynamoDb from "./libs/dynamodb-lib"; // uvozi metod put za kreiranje note-a
 
 export const main = handler(async (event, context) => {
