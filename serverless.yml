@@ -82,13 +82,12 @@ functions:
           authorizer: aws_iam
 
   get:
-  # Defines an HTTP API endpoint that calls the main function in get.js
-  # - path: url path is /notes/{id}
-  # - method: GET request
-  # - cors: enabled CORS (Cross-Origin Resource Sharing) for browser cross
-  #     domain api call, our frontend is going to be served from a different domain
-  # - authorizer: authenticate using the AWS IAM role
+    # Defines an HTTP API endpoint that calls the main function in get.js
+    # - path: url path is /notes/{id}
+    # - method: GET request
     handler: get.main
+    memorySize: 128
+    timeout: 20
     events:
       - http:
           path: notes/{id}
